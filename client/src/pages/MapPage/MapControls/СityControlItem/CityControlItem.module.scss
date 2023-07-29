@@ -1,0 +1,46 @@
+@import "../../../../variables";
+
+.marker {
+  display: flex;
+  align-items: center;
+  padding: 15px 15px;
+  width: 100%;
+  border-bottom: 1px solid #dedede;
+
+  &:hover {
+    background-color: #ececec;
+    cursor: pointer;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    flex-grow: 1;
+  }
+
+  &__counter {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: $accent-color;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    line-height: 1;
+  }
+
+  &__img {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+  }
+
+  &__info {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+  }
+}
