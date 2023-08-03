@@ -10,6 +10,7 @@ const MapPage: React.FC = () => {
   const [zoom, setZoom] = useState<number>(MAP.CITY_ZOOM);
   const [bounds, setBounds] = useState<any | null>(null);
   const [activeMarker, setActiveMarker] = useState<IMemorialMarker | null>(null);
+  const [activeTypes, setActiveTypes] = useState<string[]>([]);
   const mapRef = React.useRef<any>(null);
   
   const setCoords = (lat: number, lng: number, zoom = 10) => {
@@ -24,6 +25,8 @@ const MapPage: React.FC = () => {
         setActiveMarker={setActiveMarker}
         zoom={zoom}
         bounds={bounds}
+        activeTypes={activeTypes}
+        setActiveTypes={setActiveTypes}
       />
       <Map
         map={map}
@@ -35,6 +38,7 @@ const MapPage: React.FC = () => {
         setCoords={setCoords}
         activeMarker={activeMarker}
         setActiveMarker={setActiveMarker}
+        activeTypes={activeTypes}
       />
     </div>
   );

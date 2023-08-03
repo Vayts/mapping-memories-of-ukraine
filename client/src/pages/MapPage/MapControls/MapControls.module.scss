@@ -7,6 +7,9 @@
 
   &__categories {
     height: 40%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
     border-radius: 2px;
   }
 
@@ -15,7 +18,9 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+  }
 
+  &__markers, &__categories {
     ::-webkit-scrollbar {
       width: 10px;
     }
@@ -34,7 +39,6 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #555;
     }
-
   }
 
   &__type {

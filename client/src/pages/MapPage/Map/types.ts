@@ -11,5 +11,6 @@ export interface IMapProps {
   setCoords: (lat: number, lng: number) => void,
   activeMarker: IMemorialMarker | null,
   setActiveMarker: Dispatch<SetStateAction<IMemorialMarker | null>>,
-  setBounds: React.Dispatch<LatLngBounds>
+  setBounds: React.Dispatch<LatLngBounds>,
+  activeTypes: string[],
 }

@@ -25,6 +25,34 @@ const optimization = () => {
 
 const filename = (ext) => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);
 
+const scssLoaders = (extra) => {
+  const loaders = [
+    {
+      loader: 'style-loader',
+      options: {
+        esModule: false,
+      },
+    },
+    {
+      loader: 'css-loader',
+      options: {
+        importLoaders: 1,
+        // module: true,
+        modules: {
+          exportLocalsConvention: 'dashes',
+          localIdentName: '[local]_[hash:base64:5]',
+        },
+      },
+    },
+  ];
+	
+  if (extra) {
+    loaders.push(extra);
+  }
+	
+  return loaders;
+};
+
 const cssLoaders = (extra) => {
   const loaders = [
     MiniCssExtractPlugin.loader,
@@ -32,9 +60,6 @@ const cssLoaders = (extra) => {
       loader: 'css-loader',
       options: {
         importLoaders: 1,
-        // modules: {
-        //   localIdentName: '[local]_[hash:base64:5]',
-        // },
       },
     },
   ];
@@ -178,7 +203,7 @@ module.exports = {
       },
       {
         test: /\.module.scss$/,
-        use: cssLoaders('sass-loader'),
+        use: scssLoaders('sass-loader'),
       },
       {
         test: /\.[tj]sx$/,

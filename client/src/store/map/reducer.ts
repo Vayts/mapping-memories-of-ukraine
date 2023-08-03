@@ -7,9 +7,30 @@ const initialState: IMapState = {
     lat: 48.4,
     lng: 32.65,
   },
+  types: [
+    {
+      id: 4,
+      type_id: 'ussr',
+      counter: 2,
+      title: {
+        en: 'Monuments of the Soviet era',
+        uk: 'Пам`ятники радянської доби',
+      },
+    },
+    {
+      id: 2,
+      type_id: 'ukraine',
+      counter: 3,
+      title: {
+        en: 'Monuments of the Soviet era',
+        uk: 'Пам`ятники доби незалежності',
+      },
+    },
+  ],
   markers: {
     cities: [
       {
+        id: 1,
         lat: 49.988,
         lng: 36.2332,
         icon: '../assets/img/city.svg',
@@ -20,6 +41,7 @@ const initialState: IMapState = {
         },
       },
       {
+        id: 2,
         lat: 50.458852456708854,
         lng: 30.52423941267742,
         icon: '../assets/img/city.svg',
@@ -56,7 +78,7 @@ const initialState: IMapState = {
         id: 2,
         lat: 50.07962889743718,
         lng: 36.306534018699246,
-        type: 'ussr',
+        type: 'ukraine',
         title: {
           en: 'German War Cemetery',
           uk: 'Німецький військовий цвинтар',
@@ -77,7 +99,7 @@ const initialState: IMapState = {
         id: 3,
         lat: 50.445973375699,
         lng: 30.539972465102988,
-        type: 'ussr',
+        type: 'ukraine',
         title: {
           en: 'German War Cemetery',
           uk: 'Німецький військовий цвинтар',
@@ -86,14 +108,14 @@ const initialState: IMapState = {
           uk: 'Антоновский міст, Київ, Київська область, Україна',
           en: 'Antonivka Road Bridge, Kiyv, Kiyv region, Ukraine',
         },
-        icon: '../assets/img/memorialBlue.svg',
+        icon: '../assets/img/cemeteryBlue.svg',
         link: 'void',
         city_id: 'kiyv',
         description: {
           en: 'It is located on the territory of the city cemetery No. 17 in Kharkiv. This is the cemetery of German soldiers killed during the Second World War.  It was built in the period from 1996 to 1998 by the German People\'s Association for the Care of War Graves on behalf of the Federal Republic of Germany.',
           uk: 'Знаходиться на території міського кладовища № 17 в м. Харкові. Це кладовище загиблих німецьких солдат під час Другої світової війни.  Споруджене  в період з 1996 по 1998 роки Німецькою Народною Спілкою догляду за військовими похованнями за дорученням Федеративної республіки Німеччини.',
         },
-      }
+      },
     ],
   },
   isLoading: false,

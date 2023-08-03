@@ -1,0 +1,59 @@
+@import "../../../variables";
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 400;
+  user-select: none;
+
+  &:hover {
+    cursor: pointer;
+
+    .checkbox__custom:not(.active) {
+      background-color: $accent-color-hover;
+
+      span {
+        &:before {
+          color: #ffffff;
+        }
+      }
+    }
+  }
+
+  &__input {
+    display: none;
+  }
+
+  &__custom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border: 1px solid $light-gray-color;
+    border-radius: 5px;
+    margin-right: 8px;
+    transition: all 0.2s;
+
+    &.active {
+      background-color: $accent-color;
+      border-color: $accent-color;
+
+      span {
+        &:before {
+          color: #ffffff;
+        }
+      }
+    }
+
+    span {
+      font-size: 14px;
+
+      &:before {
+        color: transparent;
+      }
+    }
+  }
+}
+

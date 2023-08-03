@@ -1,5 +1,5 @@
-import React, { ReactNode, useCallback, useEffect, useState } from 'react';
-import { GoogleMap, MarkerClusterer, useJsApiLoader } from '@react-google-maps/api';
+import React, { ReactNode, useCallback, useEffect } from 'react';
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import { useAppSelector } from '@src/hooks/hooks';
 import { selectCityMarkers, selectMemorialMarkers } from '@src/store/map/selectors';
 import MemorialMarker from '@src/pages/MapPage/MemorialMarker/MemorialMarker';
@@ -40,6 +40,7 @@ const Map: React.FC<IMapProps> = (props) => {
     activeMarker,
     setActiveMarker,
     setBounds,
+    activeTypes,
   } = props;
   const memorialMarkers = useAppSelector(selectMemorialMarkers);
   const cityMarkers = useAppSelector(selectCityMarkers);
@@ -82,7 +83,7 @@ const Map: React.FC<IMapProps> = (props) => {
   }, []);
   
   const onUnmount = React.useCallback((map: any) => {
-    setMap(null);
+    setMap(map);
   }, []);
   
   const generateMarkers = useCallback((zoom: number): ReactNode => {
@@ -90,15 +91,22 @@ const Map: React.FC<IMapProps> = (props) => {
       return cityMarkers.map((item) => {
         return (
           <CityMarker
+            key={item.id}
             marker={item}
             setCoords={setCoords}
           />
         );
       });
     }
-    return memorialMarkers.map((item) => {
+    return memorialMarkers.filter((item) => {
+      if (activeTypes.length > 0) {
+        return activeTypes.includes(item.type);
+      }
+      return item;
+    }).map((item) => {
       return (
         <MemorialMarker
+          key={item.id}
           marker={item}
           activeMarker={activeMarker}
           setActiveMarker={setActiveMarker}
@@ -106,7 +114,7 @@ const Map: React.FC<IMapProps> = (props) => {
         />
       );
     });
-  }, [zoom, activeMarker]);
+  }, [zoom, activeMarker, activeTypes]);
   
   return isLoaded ? (
     <GoogleMap
