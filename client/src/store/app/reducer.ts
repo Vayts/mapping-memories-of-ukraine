@@ -15,3 +15,5 @@ export const appSlice = createSlice({
     },
   },
 });
+
+export const { appRequestEnd } = appSlice.actions;

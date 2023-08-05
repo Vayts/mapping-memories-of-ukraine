@@ -5,9 +5,8 @@ import { selectLocale } from '@src/store/app/selectors';
 import styles from './MarkerControlItem.module.scss';
 
 const MarkerControlItem: React.FC<IMarkerControllerItemProps> = ({ marker, setCoords, setActiveMarker }) => {
-  const { lng, lat, link, id, icon, title, address, description } = marker;
+  const { lng, lat, icon, title, address } = marker;
   const locale = useAppSelector(selectLocale);
-  
   const clickHandler = useCallback(() => {
     setCoords(lat, lng, 15);
     setActiveMarker(marker);

@@ -5,3 +5,4 @@ export const selectMemorialMarkers = (state: RootState): IMemorialMarker[] => st
 
 export const selectCityMarkers = (state: RootState): ICityMarker[] => state.map.markers.cities;
 export const selectTypeMarkers = (state: RootState): IMarkerType[] => state.map.types;
+export const selectActiveTypes = (state: RootState): string[] => state.map.activeTypes;

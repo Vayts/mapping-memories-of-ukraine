@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Map from '@src/pages/MapPage/Map/Map';
 import MapControls from '@src/pages/MapPage/MapControls/MapControls';
 import { IMemorialMarker } from '@src/store/map/types';
 import { MAP } from '@constants/map';
+import { useAppDispatch } from '@src/hooks/hooks';
+import { getMapInfoRequest } from '@src/store/map/actions';
 import styles from './MapPage.module.scss';
 
 const MapPage: React.FC = () => {
   const [map, setMap] = React.useState<any>(null);
-  const [zoom, setZoom] = useState<number>(MAP.CITY_ZOOM);
+  const [zoom, setZoom] = useState<number>(MAP.DEFAULT_ZOOM);
   const [bounds, setBounds] = useState<any | null>(null);
   const [activeMarker, setActiveMarker] = useState<IMemorialMarker | null>(null);
-  const [activeTypes, setActiveTypes] = useState<string[]>([]);
   const mapRef = React.useRef<any>(null);
+  const dispatch = useAppDispatch();
+  
+  useEffect(() => {
+    dispatch(getMapInfoRequest());
+  }, []);
   
   const setCoords = (lat: number, lng: number, zoom = 10) => {
     mapRef.current.panTo({ lat, lng });
@@ -25,8 +31,6 @@ const MapPage: React.FC = () => {
         setActiveMarker={setActiveMarker}
         zoom={zoom}
         bounds={bounds}
-        activeTypes={activeTypes}
-        setActiveTypes={setActiveTypes}
       />
       <Map
         map={map}
@@ -38,7 +42,6 @@ const MapPage: React.FC = () => {
         setCoords={setCoords}
         activeMarker={activeMarker}
         setActiveMarker={setActiveMarker}
-        activeTypes={activeTypes}
       />
     </div>
   );

@@ -1,6 +1,5 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import 'react-toastify/dist/ReactToastify.css';
 import { THEMES } from '@constants/themes';
 import { Route, Routes } from 'react-router-dom';
 import Layout from '@hoc/Layout/Layout';

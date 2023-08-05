@@ -3,7 +3,7 @@
 .marker {
   display: flex;
   align-items: center;
-  padding: 7px 15px;
+  padding: 2px 15px;
   width: 100%;
   border-bottom: 1px solid #dedede;
 
@@ -13,8 +13,8 @@
   }
 
   &__img {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     margin-right: 10px;
   }
 
@@ -23,7 +23,7 @@
   }
 
   &__title {
-    margin: 0 0 5px;
+    margin: 0 0 3px;
     width: 300px;
     white-space: nowrap;
     overflow: hidden;

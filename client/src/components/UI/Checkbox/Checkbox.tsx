@@ -19,7 +19,7 @@ const Checkbox: React.FC<ICheckbox> = (props) => {
       <div className={cx(styles.checkbox__custom, checked ? styles.active : '')}>
         <span className='icon-done'/>
       </div>
-      {label}
+      <p className={styles.checkbox__text}>{label}</p>
       <input
         className={styles.checkbox__input}
         type='checkbox'

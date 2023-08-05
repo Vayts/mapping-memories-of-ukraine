@@ -1,11 +1,12 @@
 import React, { ReactNode, useCallback, useEffect } from 'react';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import { useAppSelector } from '@src/hooks/hooks';
-import { selectCityMarkers, selectMemorialMarkers } from '@src/store/map/selectors';
+import { selectActiveTypes, selectCityMarkers, selectMemorialMarkers } from '@src/store/map/selectors';
 import MemorialMarker from '@src/pages/MapPage/MemorialMarker/MemorialMarker';
 import CityMarker from '@src/pages/MapPage/CityMarker/CityMarker';
 import { IMapProps } from '@src/pages/MapPage/Map/types';
 import { MAP } from '@constants/map';
+import * as process from 'process';
 import { defaultTheme } from './MapTheme';
 
 const containerStyle = {
@@ -40,19 +41,19 @@ const Map: React.FC<IMapProps> = (props) => {
     activeMarker,
     setActiveMarker,
     setBounds,
-    activeTypes,
   } = props;
   const memorialMarkers = useAppSelector(selectMemorialMarkers);
   const cityMarkers = useAppSelector(selectCityMarkers);
+  const activeTypes = useAppSelector(selectActiveTypes);
   const { isLoaded } = useJsApiLoader({
     id: '845a623558bc42e2',
-    googleMapsApiKey: 'AIzaSyDfQcE5YPPU7_TZS12y2FjDrbXyfEq5kvA',
+    googleMapsApiKey: process.env.GOOGLE_MAP_API as string,
   });
   
   useEffect(() => {
     if (map) {
       setTimeout(() => {
-        setZoom(MAP.CITY_ZOOM);
+        setZoom(MAP.DEFAULT_ZOOM);
       }, 200);
     }
   }, [map]);
@@ -91,22 +92,17 @@ const Map: React.FC<IMapProps> = (props) => {
       return cityMarkers.map((item) => {
         return (
           <CityMarker
-            key={item.id}
+            key={item._id}
             marker={item}
             setCoords={setCoords}
           />
         );
       });
     }
-    return memorialMarkers.filter((item) => {
-      if (activeTypes.length > 0) {
-        return activeTypes.includes(item.type);
-      }
-      return item;
-    }).map((item) => {
+    return memorialMarkers.map((item) => {
       return (
         <MemorialMarker
-          key={item.id}
+          key={item._id}
           marker={item}
           activeMarker={activeMarker}
           setActiveMarker={setActiveMarker}
@@ -114,7 +110,7 @@ const Map: React.FC<IMapProps> = (props) => {
         />
       );
     });
-  }, [zoom, activeMarker, activeTypes]);
+  }, [zoom, activeMarker, activeTypes, memorialMarkers]);
   
   return isLoaded ? (
     <GoogleMap

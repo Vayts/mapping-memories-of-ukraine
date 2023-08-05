@@ -14,7 +14,7 @@ const MemorialMarker: React.FC<IMemorialMarkerProps> = (
   },
 ) => {
   const {
-    id,
+    _id,
     lat,
     lng,
     description,
@@ -39,7 +39,7 @@ const MemorialMarker: React.FC<IMemorialMarkerProps> = (
         icon={{ url: icon }}
         onClick={setMarker}
       />
-      {activeMarker?.id === id ? (
+      {activeMarker?._id === _id ? (
         <InfoWindow
           position={marker}
           onCloseClick={closeMarker}

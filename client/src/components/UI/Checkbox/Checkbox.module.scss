@@ -21,6 +21,10 @@
     }
   }
 
+  &__text {
+    margin: 0;
+  }
+
   &__input {
     display: none;
   }
@@ -29,12 +33,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20px;
-    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
     border: 1px solid $light-gray-color;
     border-radius: 5px;
     margin-right: 8px;
     transition: all 0.2s;
+    white-space: nowrap;
 
     &.active {
       background-color: $accent-color;

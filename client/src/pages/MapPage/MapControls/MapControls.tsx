@@ -1,6 +1,10 @@
 import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useAppSelector } from '@src/hooks/hooks';
-import { selectCityMarkers, selectMemorialMarkers, selectTypeMarkers } from '@src/store/map/selectors';
+import {
+  selectCityMarkers,
+  selectMemorialMarkers,
+  selectTypeMarkers,
+} from '@src/store/map/selectors';
 import MarkerControlItem from '@src/pages/MapPage/MapControls/MarkerControlItem/MarkerControlItem';
 import { IMapControlsProps } from '@src/pages/MapPage/MapControls/types';
 import { MAP } from '@constants/map';
@@ -8,9 +12,10 @@ import CityControlItem from '@src/pages/MapPage/MapControls/СityControlItem/Cit
 import { IMemorialMarker } from '@src/store/map/types';
 import { getExtendBounds } from '@helpers/mapHelper';
 import TypeControlItem from '@src/pages/MapPage/MapControls/TypeControlItem/TypeControlItem';
+import MapNothingFound from '@src/pages/MapPage/MapControls/MapNothingFound/MapNothingFound';
 import styles from './MapControls.module.scss';
 
-const MapControls: React.FC<IMapControlsProps> = ({ setCoords, setActiveMarker, zoom, bounds, setActiveTypes, activeTypes }) => {
+const MapControls: React.FC<IMapControlsProps> = ({ setCoords, setActiveMarker, zoom, bounds }) => {
   const [sortedMarkers, setSortedMarkers] = useState<IMemorialMarker[]>([]);
   const [controlType, setControlType] = useState<string>(MAP.CITY);
   const markers = useAppSelector(selectMemorialMarkers);
@@ -52,35 +57,26 @@ const MapControls: React.FC<IMapControlsProps> = ({ setCoords, setActiveMarker, 
   const generateContent = () => {
     if (sortedMarkers.length === 0 && controlType === MAP.MARKER) {
       return (
-        <div>
-          Жодних пам&#39;яток в цьому районі не знайдено
-          <span className='icon-сross' />
-          
-        </div>
+        <MapNothingFound/>
       );
     }
-    
+
     if (controlType === MAP.MARKER) {
       return (
-        sortedMarkers.filter((item) => {
-          if (activeTypes.length > 0) {
-            return activeTypes.includes(item.type);
-          }
-          return item;
-        }).map((item) => (
+        sortedMarkers.map((item) => (
           <MarkerControlItem
-            key={item.id}
+            key={item._id}
             marker={item}
             setCoords={setCoords}
             setActiveMarker={setActiveMarker}
           />
         )));
     }
-    
+
     if (controlType === MAP.CITY) {
       return cities.map((item) => (
         <CityControlItem
-          key={item.id}
+          key={item._id}
           marker={item}
           setCoords={setCoords}
         />
@@ -96,9 +92,7 @@ const MapControls: React.FC<IMapControlsProps> = ({ setCoords, setActiveMarker, 
           {markerTypes.map((item) => {
             return (
               <TypeControlItem
-                key={item.id}
-                checked={activeTypes.includes(item.type_id)}
-                setActiveTypes={setActiveTypes}
+                key={item._id}
                 typeMarker={item}
               />
             );

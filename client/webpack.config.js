@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -5,6 +6,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const Dotenv = require('dotenv-webpack');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const isDev = process.env.NODE_ENV === 'production';
 const isProd = !isDev;
@@ -105,6 +110,7 @@ const jsLoaders = () => {
 
 const plugins = () => {
   const base = [
+    new Dotenv(),
     new HTMLWebpackPlugin({
       template: './index.html',
       favicon: '../public/favicon.ico',
@@ -155,6 +161,13 @@ module.exports = {
     publicPath: '/',
   },
   resolve: {
+    fallback: {
+      process: require.resolve('process/browser'),
+      path: require.resolve('path-browserify'),
+      os: require.resolve('os-browserify/browser'),
+      crypto: require.resolve('crypto-browserify'),
+      stream: require.resolve('stream-browserify'),
+    },
     extensions: ['.js', '.json', '.ts', '.tsx', '.jsx', '.scss'],
     alias: {
       '@constants': path.resolve(__dirname, 'src/constants'),
