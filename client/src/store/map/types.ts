@@ -19,6 +19,8 @@ export interface IMemorialMarker {
   lng: number,
   type_id: string,
   city_id: string,
+  img: string | null,
+  img_source: string | null,
   address: {
     en: string,
     uk: string,
@@ -31,7 +33,7 @@ export interface IMemorialMarker {
     en: string,
     uk: string,
   },
-  link: string,
+  link: string | null,
   icon: string,
 }
 

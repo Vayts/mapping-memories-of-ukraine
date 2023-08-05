@@ -1,0 +1,16 @@
+.gm-style-iw {
+  padding: 0 !important;
+}
+
+.gm-style-iw-d {
+  padding: 0 !important;
+  overflow: unset !important;
+}
+
+.gm-ui-hover-effect {
+  background-color: #ffffff !important;
+  top: 5px !important;
+  right: 5px !important;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.20);
+}

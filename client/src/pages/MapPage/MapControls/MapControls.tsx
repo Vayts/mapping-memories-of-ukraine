@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import React, { ChangeEvent, memo, useCallback, useEffect, useState } from 'react';
 import { useAppSelector } from '@src/hooks/hooks';
 import {
   selectCityMarkers,
@@ -56,13 +56,13 @@ const MapControls: React.FC<IMapControlsProps> = ({ setCoords, setActiveMarker, 
     setControlType(e.target.value);
   }, []);
   
-  const generateContent = () => {
+  const generateContent = useCallback(() => {
     if (sortedMarkers.length === 0 && controlType === MAP.MARKER) {
       return (
         <MapNothingFound setCoords={setCoords}/>
       );
     }
-
+    
     if (controlType === MAP.MARKER) {
       return (
         sortedMarkers.map((item) => (
@@ -74,7 +74,7 @@ const MapControls: React.FC<IMapControlsProps> = ({ setCoords, setActiveMarker, 
           />
         )));
     }
-
+    
     if (controlType === MAP.CITY) {
       return cities.map((item) => (
         <CityControlItem
@@ -84,7 +84,7 @@ const MapControls: React.FC<IMapControlsProps> = ({ setCoords, setActiveMarker, 
         />
       ));
     }
-  };
+  }, [controlType, sortedMarkers]);
   
   return (
     <div className={styles.controls}>
@@ -140,4 +140,4 @@ const MapControls: React.FC<IMapControlsProps> = ({ setCoords, setActiveMarker, 
   );
 };
 
-export default MapControls;
+export default memo(MapControls);

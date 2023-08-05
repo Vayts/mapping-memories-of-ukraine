@@ -1,25 +1,38 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import styles from './Header.module.scss';
 
 const Header: React.FC = () => {
+  const { t } = useTranslation();
+  
   return (
     <>
       <div className={styles.container}>
         <div className={styles.content}>
-          <div className={styles.logo}>
-            Logo
-          </div>
+          <img className={styles.logo} src='../assets/img/logo.svg' alt='mapping memories of ukraine logo'/>
           <nav className={styles.nav}>
             <ul className={styles.list}>
               <li className={styles.item}>
-                <NavLink className={styles.link} to='/map'>Мапа</NavLink>
+                <NavLink className={styles.link} to='/map'>{t('mapOfMemorials')}</NavLink>
               </li>
               <li className={styles.item}>
-                <NavLink className={styles.link} to='/map'>Колекція інтерв&apos;ю</NavLink>
+                <NavLink className={styles.link} to='/interviews'>{t('interviews')}</NavLink>
               </li>
               <li className={styles.item}>
-                <NavLink className={styles.link} to='/map'>Про проект</NavLink>
+                <NavLink className={styles.link} to='/art-projects'>{t('artProjects')}</NavLink>
+              </li>
+              <li className={styles.item}>
+                <NavLink className={styles.link} to='/special-projects'>{t('specialProjects')}</NavLink>
+              </li>
+              <li className={styles.item}>
+                <NavLink className={styles.link} to='/our-team'>{t('ourTeam')}</NavLink>
+              </li>
+              <li className={styles.item}>
+                <NavLink className={styles.link} to='/contacts'>{t('contacts')}</NavLink>
+              </li>
+              <li className={styles.item}>
+                <NavLink className={styles.link} to='/our-friends'>{t('ourFriends')}</NavLink>
               </li>
             </ul>
           </nav>

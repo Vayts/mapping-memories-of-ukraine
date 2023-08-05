@@ -23,6 +23,10 @@ export class MemorialMarker {
   description: LocaleSchema;
   @Prop()
   title: LocaleSchema;
+  @Prop({ default: null })
+  img: string;
+  @Prop({ default: null })
+  img_source: string;
   @Prop()
   link: string;
   @Prop()
