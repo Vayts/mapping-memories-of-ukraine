@@ -12,9 +12,21 @@
 
   &__text {
     text-align: center;
+    font-size: 14px;
   }
 
   &__icon {
     font-size: 75px;
+  }
+
+  &__zoom-button {
+    text-decoration: underline;
+    font-size: 14px;
+    transition: all 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      color: $accent-color;
+    }
   }
 }

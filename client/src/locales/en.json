@@ -1,3 +1,7 @@
 {
-  "mapNothingFound": "Unfortunately, there are no markers in this area yet."
+  "cities": "Cities",
+  "mapNothingFound": "Unfortunately, there are no markers in this area yet.",
+  "memorials": "Memorials",
+  "typeOfMemorials": "Types of memorials",
+  "zoomOut": "Zoom out"
 }

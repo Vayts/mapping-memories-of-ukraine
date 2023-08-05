@@ -3,4 +3,6 @@ export const MAP = {
   DEFAULT_ZOOM: 6,
   CITY: 'CITY',
   MARKER: 'MARKER',
+  DEFAULT_LAT: 48.4,
+  DEFAULT_LNG: 32.65,
 };

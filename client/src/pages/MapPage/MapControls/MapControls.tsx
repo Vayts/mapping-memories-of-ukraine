@@ -13,6 +13,7 @@ import { IMemorialMarker } from '@src/store/map/types';
 import { getExtendBounds } from '@helpers/mapHelper';
 import TypeControlItem from '@src/pages/MapPage/MapControls/TypeControlItem/TypeControlItem';
 import MapNothingFound from '@src/pages/MapPage/MapControls/MapNothingFound/MapNothingFound';
+import { useTranslation } from 'react-i18next';
 import styles from './MapControls.module.scss';
 
 const MapControls: React.FC<IMapControlsProps> = ({ setCoords, setActiveMarker, zoom, bounds }) => {
@@ -21,6 +22,7 @@ const MapControls: React.FC<IMapControlsProps> = ({ setCoords, setActiveMarker, 
   const markers = useAppSelector(selectMemorialMarkers);
   const cities = useAppSelector(selectCityMarkers);
   const markerTypes = useAppSelector(selectTypeMarkers);
+  const { t } = useTranslation();
   
   useEffect(() => {
     if (zoom <= MAP.CITY_ZOOM) {
@@ -57,7 +59,7 @@ const MapControls: React.FC<IMapControlsProps> = ({ setCoords, setActiveMarker, 
   const generateContent = () => {
     if (sortedMarkers.length === 0 && controlType === MAP.MARKER) {
       return (
-        <MapNothingFound/>
+        <MapNothingFound setCoords={setCoords}/>
       );
     }
 
@@ -87,7 +89,7 @@ const MapControls: React.FC<IMapControlsProps> = ({ setCoords, setActiveMarker, 
   return (
     <div className={styles.controls}>
       <div className={styles.controls__categories}>
-        <h3 className={styles.controls__title}>Категорії</h3>
+        <h3 className={styles.controls__title}>{t('typeOfMemorials')}</h3>
         <ul className={styles.controls__list}>
           {markerTypes.map((item) => {
             return (
@@ -112,7 +114,7 @@ const MapControls: React.FC<IMapControlsProps> = ({ setCoords, setActiveMarker, 
               onChange={changeHandler}
             />
             <label htmlFor="memorialType" className={styles.controls__label}>
-              {'Пам\'ятки'}
+              {t('memorials')}
             </label>
           </div>
           <div>
@@ -126,7 +128,7 @@ const MapControls: React.FC<IMapControlsProps> = ({ setCoords, setActiveMarker, 
               onChange={changeHandler}
             />
             <label htmlFor="cityType" className={styles.controls__label}>
-              Міста
+              {t('cities')}
             </label>
           </div>
         </div>
