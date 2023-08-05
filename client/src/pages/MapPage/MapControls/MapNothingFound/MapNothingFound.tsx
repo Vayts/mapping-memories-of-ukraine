@@ -7,10 +7,10 @@ const MapNothingFound: React.FC = () => {
   const { t } = useTranslation();
   
   return (
-    <div className={styles.nothingFound}>
+    <li className={styles.nothingFound}>
       <span className={cx('icon-nothing-found', styles.nothingFound__icon)}/>
       <p className={styles.nothingFound__text}>{t('mapNothingFound')}</p>
-    </div>
+    </li>
   );
 };
 

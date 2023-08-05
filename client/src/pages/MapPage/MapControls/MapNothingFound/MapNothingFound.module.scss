@@ -1,9 +1,20 @@
-.nothing-found {
-  &__text {
+@import "../../../../variables";
 
+.nothing-found {
+  height: 100%;
+  color: $light-gray-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px;
+  margin-top: -40px;
+
+  &__text {
+    text-align: center;
   }
 
   &__icon {
-    font-size: 100px;
+    font-size: 75px;
   }
 }
