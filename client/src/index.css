@@ -42,10 +42,29 @@ code {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
+.icon-burger:before {
+  content: "\e907";
+}
+.icon-left:before {
+  content: "\e902";
+}
+.icon-down:before {
+  content: "\e903";
+}
+.icon-up:before {
+  content: "\e904";
+}
+.icon-cross:before {
+  content: "\e905";
+}
+.icon-right:before {
+  content: "\e906";
+}
 .icon-done:before {
   content: "\e901";
 }
 .icon-nothing-found:before {
   content: "\e900";
 }
+
+

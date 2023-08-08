@@ -26,7 +26,7 @@ const defaultOptions = {
   mapTypeControlOptions: {
     position: 7.0,
   },
-  // maxZoom: 17,
+  maxZoom: 17,
   minZoom: 3,
 };
 

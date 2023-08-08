@@ -1,6 +1,7 @@
 import React, { ChangeEvent, memo, useCallback, useEffect, useState } from 'react';
-import { useAppSelector } from '@src/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '@src/hooks/hooks';
 import {
+  selectActiveTypes,
   selectCityMarkers,
   selectMemorialMarkers,
   selectTypeMarkers,
@@ -14,14 +15,19 @@ import { getExtendBounds } from '@helpers/mapHelper';
 import TypeControlItem from '@src/pages/MapPage/MapControls/TypeControlItem/TypeControlItem';
 import MapNothingFound from '@src/pages/MapPage/MapControls/MapNothingFound/MapNothingFound';
 import { useTranslation } from 'react-i18next';
+import { setActiveTypes } from '@src/store/map/reducer';
+import cx from 'classnames';
 import styles from './MapControls.module.scss';
 
 const MapControls: React.FC<IMapControlsProps> = ({ setCoords, setActiveMarker, zoom, bounds }) => {
   const [sortedMarkers, setSortedMarkers] = useState<IMemorialMarker[]>([]);
   const [controlType, setControlType] = useState<string>(MAP.CITY);
+  const [isMenuOpen, setMenuOpen] = useState<boolean>(true);
   const markers = useAppSelector(selectMemorialMarkers);
   const cities = useAppSelector(selectCityMarkers);
   const markerTypes = useAppSelector(selectTypeMarkers);
+  const activeTypes = useAppSelector(selectActiveTypes);
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
   
   useEffect(() => {
@@ -56,6 +62,10 @@ const MapControls: React.FC<IMapControlsProps> = ({ setCoords, setActiveMarker, 
     setControlType(e.target.value);
   }, []);
   
+  const resetFilters = useCallback(() => {
+    dispatch(setActiveTypes([]));
+  }, []);
+  
   const generateContent = useCallback(() => {
     if (sortedMarkers.length === 0 && controlType === MAP.MARKER) {
       return (
@@ -87,9 +97,15 @@ const MapControls: React.FC<IMapControlsProps> = ({ setCoords, setActiveMarker, 
   }, [controlType, sortedMarkers]);
   
   return (
-    <div className={styles.controls}>
+    <div className={cx(styles.controls, isMenuOpen ? styles.active : '')}>
+      <div className={styles.controls__openButton} onClick={() => setMenuOpen(!isMenuOpen)}>
+        <span className={isMenuOpen ? 'icon-cross' : 'icon-right'}/>
+      </div>
       <div className={styles.controls__categories}>
-        <h3 className={styles.controls__title}>{t('typeOfMemorials')}</h3>
+        <div className={styles.controls__controlType}>
+          <h3 className={styles.controls__title}>{t('typeOfMemorials')}</h3>
+          {activeTypes.length ? <span onClick={resetFilters} className={styles.controls__reset}>{t('resetFilters')}</span> : null}
+        </div>
         <ul className={styles.controls__list}>
           {markerTypes.map((item) => {
             return (
