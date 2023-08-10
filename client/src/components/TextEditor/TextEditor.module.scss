@@ -1,0 +1,16 @@
+@import "../../variables";
+
+.editor {
+  background-color: #fff;
+  border: 1px solid $light-border-color;
+  min-height: 300px;
+  padding: 10px;
+  cursor: text;
+  font-family: 'Montserrat', sans-serif;
+
+  &__button {
+    div {
+      border: 1px solid $light-border-color;
+    }
+  }
+}

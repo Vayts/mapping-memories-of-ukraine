@@ -1,0 +1,22 @@
+@import "../../variables";
+
+.container {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.content {
+
+}
+
+.banner {
+
+  &__img {
+    border-top: 1px solid $semi-gray-color;
+    border-bottom: 1px solid $semi-gray-color;
+    margin: 20px 0;
+    padding: 20px;
+    width: 100%;
+  }
+}

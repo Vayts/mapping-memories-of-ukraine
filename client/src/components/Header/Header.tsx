@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import cx from 'classnames';
 import styles from './Header.module.scss';
 
 const Header: React.FC = () => {
+  const [isNavOpen, setNavOpen] = useState(false);
   const { t } = useTranslation();
   
   return (
     <div className={styles.header}>
       <div className={styles.header__content}>
         <img className={styles.header__logo} src='../assets/img/logo.svg' alt='mapping memories of ukraine logo'/>
-        <nav className={styles.nav}>
+        <span className={cx(isNavOpen ? 'icon-cross' : 'icon-burger', styles.header__navButton)} onClick={() => setNavOpen(!isNavOpen)}/>
+        <nav className={cx(styles.nav, isNavOpen ? styles.navOpen : '')}>
           <ul className={styles.nav__list}>
             <li className={styles.nav__item}>
               <NavLink
@@ -38,7 +40,7 @@ const Header: React.FC = () => {
                 className={({ isActive }) => {
                   return cx(styles.nav__link, isActive ? styles.active : '');
                 }}
-                to='/art-projects'
+                to='/admin/create-interview'
               >
                 {t('artProjects')}
               </NavLink>
@@ -58,29 +60,9 @@ const Header: React.FC = () => {
                 className={({ isActive }) => {
                   return cx(styles.nav__link, isActive ? styles.active : '');
                 }}
-                to='/our-team'
+                to='/about_us'
               >
-                {t('ourTeam')}
-              </NavLink>
-            </li>
-            <li className={styles.nav__item}>
-              <NavLink
-                className={({ isActive }) => {
-                  return cx(styles.nav__link, isActive ? styles.active : '');
-                }}
-                to='/contacts'
-              >
-                {t('contacts')}
-              </NavLink>
-            </li>
-            <li className={styles.nav__item}>
-              <NavLink
-                className={({ isActive }) => {
-                  return cx(styles.nav__link, isActive ? styles.active : '');
-                }}
-                to='/our-friends'
-              >
-                {t('ourFriends')}
+                {t('aboutUs')}
               </NavLink>
             </li>
           </ul>
