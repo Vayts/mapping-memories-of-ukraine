@@ -24,7 +24,6 @@ const TextEditor: React.FC = () => {
         }}
         onEditorStateChange={setEditorState}
       />
-      {/*<div dangerouslySetInnerHTML={{ __html: value }} />*/}
     </>
   );
 };
